@@ -33,7 +33,7 @@ export default Vue.extend({
   font-size: 1.15em;
 
   img {
-    max-width: 60%;
+    max-width: 600px;
   }
 }
 </style>

@@ -5,9 +5,12 @@ import './assets/main.scss'
 import App from './App.vue'
 import router from './router'
 import VueMeta from 'vue-meta'
+import Paginate from 'vuejs-paginate'
+
 
 Vue.config.productionTip = false
 Vue.use(VueMeta)
+Vue.component('paginate', Paginate)
 
 new Vue({
   router,

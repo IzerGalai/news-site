@@ -191,6 +191,51 @@ blockquote {
   }
 }
 
+// PAGINATION
+.pagination {
+  display: inline-flex;
+  margin: 3rem 0 1rem;
+  padding: 0;
+  color: #4C5261;
+  //font-weight: bold;
+  list-style-type: none;
+
+  li {
+    border: 2px solid #4177AD;
+    margin: 0 2px;
+    border-radius: 3px;
+
+    a {
+      display: block;
+      padding: 0.3rem 0.65rem;
+      transition-duration: $time-hover;
+      user-select: none;
+
+      &:hover {
+        background-color: #5081b3;
+        color: #FFF;
+      }
+    }
+
+    &.disabled
+    {
+      & a:hover {
+        background-color: transparent;
+        color: #4C5261;
+      }
+    }
+  }
+
+  .active {
+    color: #FFF;
+    background-color: #4177AD;
+    
+    &:hover {
+      background-color: #4177AD;
+    }
+  }
+}
+
 // FOOTER
 .footer {
   position: relative;
