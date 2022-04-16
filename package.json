@@ -1,14 +1,17 @@
 {
-  "name": "news-site-p",
+  "name": "news-site",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@fontsource/roboto": "^4.5.5",
+    "purecss": "^2.1.0",
     "vue": "^2.6.14",
-    "vue-router": "^3.5.1"
+    "vue-router": "^3.5.1",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-router": "~5.0.0",

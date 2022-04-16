@@ -1,0 +1,236 @@
+@import './vars';
+
+body, html {
+  height: 100%;
+  font: 13px/1.3 'Roboto', sans-serif;
+}
+body {
+  background-color: #F8F8F8;
+}
+#__nuxt, #__layout {
+  height: 100%;
+}
+.main-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.content {
+  flex: 1 0 auto;
+}
+footer {
+  flex: 0 0 auto;
+}
+
+
+// HEADER
+header {
+  height: 110px;
+  background-color: $bg-color-header;
+  color: #FFF;
+
+  > .wrap {
+    max-width: $g-max-width;
+    margin: 0 auto;
+    padding: $g-horizontal-padding;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 2em;
+    font-style: italic;
+  }
+
+  .title {
+    margin-left: 2rem;
+  }
+}
+.logo {
+  font-size: 40px;
+  font-weight: bold;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  
+  img {
+    height: 80%;
+  }
+}
+
+
+// MAIN
+main 
+{
+  padding-bottom: 2rem;
+
+  .wrap {
+    max-width: $g-max-width;
+    margin: 0 auto;
+  }
+}
+
+
+h1 {
+  font-size: 2.5em;
+}
+a {
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+  transition-duration: $time-hover;
+
+  &:hover {
+    border-bottom-color: $link-color;
+  }
+}
+.img {
+  position: relative;
+  overflow: hidden;
+
+  .wrap {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e5e5e5;
+  }
+  img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      object-fit: cover;
+      min-width: 100%;
+      min-height: 100%;
+  }
+}
+blockquote {
+  position: relative;
+  background-color: #E5E5E5;
+  padding: 2rem 2rem 1.8rem 4rem;
+  margin: 1.75em 0;
+
+  &::before {
+    content: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2221%22%20height%3D%2215%22%20viewBox%3D%220%200%2021%2015%22%3E%0A%20%20%3Cpath%20id%3D%22Icon%5fmaterial-format-quote%22%20data-name%3D%22Icon%20material-format-quote%22%20d%3D%22M1.5%2C15H6L9%2C9V0H0V9H4.5Zm12%2C0H18l3-6V0H12V9h4.5Z%22%20transform%3D%22translate%2821%2015%29%20rotate%28180%29%22%2F%3E%0A%3C%2Fsvg%3E%0A);
+    position: absolute;
+    left: 1.2em;
+    top: 1em;
+  }
+}
+
+// MENU
+.menu {
+  position: relative;
+  background-color: #4C5261;
+  color: #FFF;
+  font-size: 1.25rem;
+  overflow: hidden;
+
+  &-center {
+    max-width: $g-max-width;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between ;
+    background-color: #4C5261;
+    position: relative;
+    z-index: 1;
+  }
+
+  nav {
+    display: flex;
+
+    a {
+      display: inline-block;
+      padding: 6px 15px 8px;
+      border-bottom: 2px solid #4C5261;
+      color: #FFF;
+      text-decoration: none;
+      text-align:center;
+      transition: $time-hover;
+      
+      &.router-link-active {
+        border-bottom-color: #FFF;
+      }
+      &:hover {
+        background-color: #5C6375;
+        border-bottom-color: #FFF;
+      }
+    }
+  }
+
+  &-time {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 280px;
+    background-color: #F7931A;
+
+    &::after {
+      display: block;
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: -80px;
+      height: 100px;
+      width: 100px;
+      background-color: #4C5261;
+      transform: rotate(-40deg) translateY(0);
+      transform-origin: top left;
+    }
+  }
+
+  &-right {
+    background-color: #F7931A;
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+// FOOTER
+.footer {
+  position: relative;
+  background-color: #001C29;
+  padding: 3rem 0 2rem;
+  color: #C5C5C5;
+  font-size: 0.9em;
+
+  .wrap {
+    max-width: $g-max-width;
+    margin: 0 auto;
+  }
+
+  h4 {
+    margin-top: 10px;
+    color: #FFF;
+    font-weight: normal;
+    font-size: 1.25em;
+  }
+
+  &-info {
+    text-align: center;
+  }
+
+  a {
+    margin: 5px 0;
+    color: #C5C5C5;
+    text-decoration: none;
+
+    &:hover {
+      color: #C5C5C5;
+      text-decoration: underline;
+    }
+  }
+
+ 
+}
+
+.copyright {
+  margin-top: 40px;
+  color: #848b9b;
+  text-align: center;
+}
