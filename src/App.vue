@@ -18,7 +18,7 @@
             <router-link to="/about">О нас</router-link>
           </nav>
           <div class="menu-time">
-            Sun DEC 05 2021 7:07 WET
+            {{ date.format(new Date(), 'ddd, DD MMMM YYYY г, HH:mm') }}
           </div>
         </div>
         <div class="menu-right"></div>
@@ -39,6 +39,29 @@
     </footer>
   </div>
 </template>
+
+
+<script lang="ts">
+import Vue from 'vue'
+import date from 'date-and-time'
+import ru from 'date-and-time/locale/ru';
+
+date.locale(ru);
+
+export default Vue.extend({
+  name: 'App',
+  metaInfo: {
+    title: 'Главная',
+    titleTemplate: '%s - Новостной портал',
+  },
+  data () {
+    return {
+      date: date
+    }
+  },
+});
+</script>
+
 
 <style lang="scss">
 

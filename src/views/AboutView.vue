@@ -16,6 +16,17 @@
   </div>
 </template>
 
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'AboutView',
+  metaInfo: {
+    title: 'О нас',
+  },
+});
+</script>
+
 <style lang="scss">
 .about {
   text-align: justify;
