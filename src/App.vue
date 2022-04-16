@@ -15,7 +15,7 @@
         <div class="menu-center">
           <nav>
             <router-link to="/" exact>Новости</router-link>
-            <router-link to="/about">О сайте</router-link>
+            <router-link to="/about">О нас</router-link>
           </nav>
           <div class="menu-time">
             Sun DEC 05 2021 7:07 WET
