@@ -2,7 +2,7 @@
   <div>
     <h1>{{ title }} ({{ $route.params.id }})</h1>
     <div class="top">
-      <a class="source" href="https://www.bloomberg.com/" target="_blank">Bloomberg News</a>
+      <a class="source" href="https://finance.yahoo.com" target="_blank">Yahoo Finance</a>
       <div class="info-time">
         <time>
           <svg fill="#707070" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px"><path d="M 12 2 C 6.4889941 2 2 6.4889982 2 12 C 2 17.511002 6.4889941 22 12 22 C 17.511006 22 22 17.511002 22 12 C 22 6.4889982 17.511006 2 12 2 z M 12 4 C 16.430126 4 20 7.5698765 20 12 C 20 16.430123 16.430126 20 12 20 C 7.5698737 20 4 16.430123 4 12 C 4 7.5698765 7.5698737 4 12 4 z M 11 6 L 11 12.414062 L 15.292969 16.707031 L 16.707031 15.292969 L 13 11.585938 L 13 6 L 11 6 z"/></svg>
@@ -16,7 +16,7 @@
       <div class="text"  v-html="text">
       </div>
       <p class="tags">
-        <strong>Tags:</strong>
+        <strong>Теги:</strong>
         <ul>
           <li><a href="/tags/crypto">Критовалюты</a>,</li>
           <li><a href="/tags/eth">NFT</a></li>

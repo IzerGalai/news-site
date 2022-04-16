@@ -270,8 +270,23 @@ blockquote {
       text-decoration: underline;
     }
   }
+}
 
- 
+.vue-back-to-top {
+  width: 30px;
+  height: 40px;
+  border-radius: 14px;
+  font-size: 18px;
+  color: #FFF;
+  background-color: #F7931A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $time-hover;
+
+  &:hover {
+    background-color: #E7830A;
+  }
 }
 
 .copyright {
