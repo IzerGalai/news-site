@@ -3,7 +3,7 @@
     <div class="news-items">
       <news-item
         v-for="(i, k) in news" :key="k"
-        :title="i.attributes.name"  :datetime="i.attributes.createdAt" :description="i.attributes.description"
+        :title="i.attributes.name" :href="'/news/'+i.attributes.slug" :datetime="i.attributes.createdAt" :description="i.attributes.description"
         :img="i.attributes.preview_img.data ? 'http://localhost:1337' + i.attributes.preview_img.data.attributes.url : ''"
         :tag="i.attributes.tags.data ? i.attributes.tags.data[0].attributes.name : ''"
         :source="i.attributes.source.data ? i.attributes.source.data.attributes.name : ''"
@@ -55,7 +55,7 @@ export default Vue.extend({
             start: (this.page-1)*this.limit,
             limit: this.limit
           },
-          fields: ['name', 'description', 'createdAt'],
+          fields: ['name', 'slug', 'description', 'createdAt'],
           populate: {
             preview_img: {
               fields: ['name', 'url'],

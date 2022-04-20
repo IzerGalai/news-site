@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>{{ title }} ({{ $route.params.id }})</h1>
+    <h1>{{ title }}</h1>
     <div class="top">
-      <a class="source" href="https://finance.yahoo.com" target="_blank">Yahoo Finance</a>
+      <a class="source" :href="source.link" target="_blank">{{ source.name }}</a>
       <div class="info-time">
         <time>
           <svg fill="#707070" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px"><path d="M 12 2 C 6.4889941 2 2 6.4889982 2 12 C 2 17.511002 6.4889941 22 12 22 C 17.511006 22 22 17.511002 22 12 C 22 6.4889982 17.511006 2 12 2 z M 12 4 C 16.430126 4 20 7.5698765 20 12 C 20 16.430123 16.430126 20 12 20 C 7.5698737 20 4 16.430123 4 12 C 4 7.5698765 7.5698737 4 12 4 z M 11 6 L 11 12.414062 L 15.292969 16.707031 L 16.707031 15.292969 L 13 11.585938 L 13 6 L 11 6 z"/></svg>
@@ -10,16 +10,18 @@
         </time>
       </div>
       <div class="separator"></div>
-      <img src="/news-detail.png" :alt="title">
+      <img :src="'http://localhost:1337' + img" :alt="title">
     </div>
     <div class="">
       <div class="text"  v-html="text">
       </div>
-      <p class="tags">
+      <p v-if="tags.length" class="tags">
         <strong>Теги:</strong>
         <ul>
-          <li><a href="/tags/crypto">Критовалюты</a>,</li>
-          <li><a href="/tags/eth">NFT</a></li>
+          <li v-for="(t, k) in tags" :key="k">
+            <a :href="'/tags/'+t.attributes.code" @click.prevent="">{{t.attributes.name}}</a>
+            <span v-if="k < tags.length - 1">,</span>
+          </li>
         </ul>
       </p>
       <!--div class="news-items pure-u-6-24">
@@ -33,47 +35,76 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
+import qs from 'qs';
 import date from 'date-and-time'
+import Showdown from 'showdown'
 import ru from 'date-and-time/locale/ru'
 date.locale(ru);
 
 export default Vue.extend({
   name: 'NewsId',
-  components: {
-
+  props: {
+    href: {
+      type: String,
+      required: true,
+    },
   },
   metaInfo: {
     title: "Государственные СМИ Китая Синьхуа выпустят NFT на фоне подавления криптовалют",
   },
   data () {
     return {
+      baseUrl: '//localhost:1337/api/news/',
       date: date,
-      title: "Государственные СМИ Китая Синьхуа выпустят NFT на фоне подавления криптовалют",
-      img: '/news-detail.png',
-      dt: 1629184013000,
-      text: `<p>Китайская государственная компания Blockchain Services Network (BSN) к концу января намерена развернуть инфраструктуру для оборота NFT-токенов, сообщила South China Morning Post.
-
-        </p><p>Большая часть нынешних новостей о NFT-токенах связана с покупкой и продажей цифровых артефактов, однако власти КНР хотят применить NFT для выдачи различных сертификатов.
-
-        </p><p>NFT (non-fungible tokens) означает «невзаимозаменяемый токен». Токены представляют собой запись в регистре внутри блокчейн-цепочки – базы данных, которая одновременно хранится на большом количестве компьютеров.
-
-        </p><p>Каждый из NFT существует в единственном экземпляре, его нельзя разделить, а вся информация о его авторе, покупателе и всех операциях с ним хранится в блокчейне. То есть NFT – это цифровой сертификат, прикреплённый к уникальному объекту и свидетельствующий о его подлинности и принадлежности.
-
-        </p><p>Чиновники намерены использовать NFT в том числе для выдачи идентификационных номеров автомобилей и дипломов об образовании. К примеру, технология позволит автовладельцам, госслужащим и страховщикам получать доступ к данным о пробеге транспортного средства, номеру двигателя и истории ремонта машины.
-
-        </p><p>Создаваемая инфраструктура не предусматривает возможности оплаты или покупки NFT за криптовалюту. Подобные сделки запрещены в КНР.
-
-        </p><p><strong>Как сообщает BSN:</strong></p>
-
-        <blockquote>Бизнесу и физическим лицам будет предоставлен интерфейс программирования для создания собственных порталов или приложений для работы с NFT. Покупать и продавать токены можно будет только за китайские юани.
-        </blockquote>
-
-        </p><p>Среди китайских компаний, которые уже занялись реализацией NFT-токенов, значатся Alibaba Group, Tencent, JD.com и Baidu. В конце декабря коллекцию фоторепортажей в виде NFT выпустило китайское новостное агентство Синьхуа. По словам одного из разработчиков инфраструктуры, в ближайшее время в Китае будут созданы миллиарды NFT-токенов.
-
-        </p>
-      `,
+      title: "",
+      source: {
+        name: '', link: ''
+      },
+      tags: [],
+      img: '',
+      dt: '',
+      text: '',
+      code: []
     }
   },
+  created () {
+    axios.get(this.baseUrl + this.$route.params.id, {
+      params: {
+        fields: ['name', 'createdAt', 'text'],
+        populate: {
+          img: {
+            fields: ['name', 'url'],
+          },
+          source: {
+              fields: ['name', 'link'],
+          },
+          tags: {
+              fields: ['name', 'code'],
+          }
+        }
+      },
+      paramsSerializer: p => {
+        return qs.stringify(p)
+      }
+    })
+    .then(response => {
+      const converter = new Showdown.Converter();
+
+      const attr = response.data.data.attributes
+      this.title = attr.name
+      this.text = converter.makeHtml(attr.text)
+      this.dt = attr.createdAt
+      this.img = attr.img.data ? attr.img.data.attributes.url : ''
+      if (attr.source.data){
+        this.source = attr.source.data.attributes
+      }
+      this.tags = attr.tags.data
+    })
+    .catch(response => {
+      console.log(response);
+    })
+  }
 })
 </script>
 
@@ -86,7 +117,6 @@ h1 {
 .top {
   
   a {
-    display: block;
     color: #000;
     font-weight: bold;
     font-size: 1.2em;

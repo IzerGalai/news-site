@@ -1,6 +1,6 @@
 <template>
   <article>
-    <a class="" href="/fds/">
+    <router-link class="" :to="this.href">
       <div class="img">
         <div class="wrap">
           <img :src="this.img" alt="">
@@ -22,7 +22,7 @@
           </time>
         </div>
       </div>
-    </a>
+    </router-link>
   </article>
 </template>
 
@@ -38,13 +38,16 @@ export default Vue.extend({
     
   },
   props: {
+    href: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
     },
     img: String,
     datetime: {
-      type: Number,
       required: true,
     },
     description: String,
@@ -53,7 +56,7 @@ export default Vue.extend({
   },
   data () {
     return {
-      date: date
+      date: date,
     }
   },
   methods: {
